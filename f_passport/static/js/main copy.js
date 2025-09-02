@@ -1,22 +1,23 @@
 $(document).ready(function() {
-	$('.footer_').fadeOut();
 	var hoverTimeout;
 	$('.part').hover(		
 		function() {			
 			$('.description').html($(this).attr('description-data'));
+			// $('.description2').html($(this).attr('description-data2'));
 			hoverTimeout = setTimeout(function() {
 				$('.description').fadeIn();
+				// $('.description2').fadeIn();
 			}, 300);
 		},
 		function() {
 			clearTimeout(hoverTimeout);
 			$('.description').fadeOut(50);	
+			// $('.description2').fadeOut(50);		
 		},
 	)
 	base_Color = "#bf2523"
 	base_City_Color = "#006400"
 	color ="#8994f7"
-	
 
 	let scale_KFD_mass = [
 		    {Level: '00', color: "#ca2323ff", mark: 10,},
@@ -30,29 +31,57 @@ $(document).ready(function() {
 			{Level: '08', color: "#90bd31", mark: 90,},
 			{Level: '09', color: "#308a45", mark: 100,},		    
 		]
-	// console.log(KFD_data_mass_prepare)
+	console.log(KFD_data_mass_prepare)
 
-	let KFD_data_mass = [];
-	let FG_data_mass = []; 
-	let Pop_Per_data_mass = []; 
+	// for (let i = 1; i <= KFD_data_mass_prepare.length; i++) { 
+	// 		KFD_data_mass[i].loc = KFD_data_mass_prepare[i].path_class
+	// 		KFD_data_mass[i].mark = KFD_data_mass_prepare[i].avg_F
+	// 		KFD_data_mass[i].color = ""		
+	// 		console.log(KFD_data_mass[i].loc)
+	// 	}  
 
-	for (let i = 0; i < KFD_data_mass_prepare.length; i++) { 
-			KFD_data_mass[i] = {}; // Инициализация объекта для каждого элемента
-			KFD_data_mass[i].loc = KFD_data_mass_prepare[i].path_class;
-			KFD_data_mass[i].mark = KFD_data_mass_prepare[i].avg_F;
-			KFD_data_mass[i].color = "";
-					
-			FG_data_mass[i] = {}; // Инициализация объекта для каждого элемента
-			FG_data_mass[i].loc = KFD_data_mass_prepare[i].path_class;
-			FG_data_mass[i].mark = KFD_data_mass_prepare[i].avg_FG;
-			FG_data_mass[i].color = "";	
-
-			Pop_Per_data_mass[i] = {}; // Инициализация объекта для каждого элемента
-			Pop_Per_data_mass[i].loc = KFD_data_mass_prepare[i].path_class;
-			Pop_Per_data_mass[i].mark = KFD_data_mass_prepare[i].avg_Pop_Per;
-			Pop_Per_data_mass[i].color = "";	
-		}  
-
+	// let KFD_data_mass = [
+	// 		{loc: 'part city Volgograd', mark: 50, color: "",},
+	// 		{loc: 'Gorodishensky', mark: 5, color: "",},
+	// 		{loc: 'Sredneakhtubinsky', mark: 45, color: "",},
+	// 		{loc: 'Volzhsky', mark: 91, color: "",},
+	// 		{loc: 'Leninsky', mark: 54, color: "",},
+	// 		{loc: 'Frolovsky', mark: 57, color: "",},
+	// 		{loc: 'Frolovo', mark: 85, color: "",},
+	// 		{loc: 'Pallasovsky', mark: 61, color: "",},
+	// 		{loc: 'Staropoltavsky', mark: 87, color: "",},
+	// 		{loc: 'Nikolaevsky', mark: 74, color: "",},
+	// 		{loc: 'Bykovsky', mark: 68, color: "",},
+	// 		{loc: 'Svetloyarsky', mark: 78, color: "",},
+	// 		{loc: 'Kalachevsky', mark: 54, color: "",},
+	// 		{loc: 'Oktyabrsky', mark: 75, color: "",},
+	// 		{loc: 'Kotelnikovsky', mark: 35, color: "",},
+	// 		{loc: 'Chernishkovsky', mark: 47, color: "",},
+	// 		{loc: 'Surovikinsky', mark: 85, color: "",},
+	// 		{loc: 'Uryupinsky', mark: 45, color: "",},
+	// 		{loc: 'Uruypinsk', mark: 76, color: "",},
+	// 		{loc: 'Mihailovsky', mark: 53, color: "",},
+	// 		{loc: 'Mihailovka', mark: 8, color: "",},
+	// 		{loc: 'Kamishinsky', mark: 67, color: "",},
+	// 		{loc: 'Kamishin', mark: 85, color: "",},
+	// 		{loc: 'Khletsky', mark: 53, color: "",},
+	// 		{loc: 'Ilovlinsky', mark: 81, color: "",},
+	// 		{loc: 'Dubovsky', mark: 74, color: "",},
+	// 		{loc: 'Olkhovsky', mark: 74, color: "",},
+	// 		{loc: 'Kotovsky', mark: 74, color: "",},
+	// 		{loc: 'Zhirnovsky', mark: 65, color: "",},
+	// 		{loc: 'Ryudnyansky', mark: 95, color: "",},
+	// 		{loc: 'Danilovsky', mark: 65, color: "",},
+	// 		{loc: 'Elansky', mark: 85, color: "",},
+	// 		{loc: 'Serafimovichsky', mark: 57, color: "",},
+	// 		{loc: 'Kikvidzensky', mark: 98, color: "",},
+	// 		{loc: 'Novonikolaevsky', mark: 54, color: "",},
+	// 		{loc: 'Novoanninsky', mark: 45, color: "",},
+	// 		{loc: 'Nehyaevsky', mark: 8, color: "",},
+	// 		{loc: 'Alekseevsky', mark: 41, color: "",},
+	// 		{loc: 'Kumilzhensky', mark: 50, color: "",},
+	// 	]
+		
 	let but_1 = document.querySelector('.but_1'),
     	but_2 = document.querySelector('.but_2'),
     	but_3 = document.querySelector('.but_3'),
@@ -60,6 +89,16 @@ $(document).ready(function() {
 		but_5 = document.querySelector('.but_5');
 	
 	but_1.onclick = function() {
+		for (let i = 0; i <= KFD_data_mass_prepare.length; i++) { 
+			KFD_data_mass[i].loc = KFD_data_mass_prepare[i].path_class
+			KFD_data_mass[i].mark = KFD_data_mass_prepare[i].avg_F
+			KFD_data_mass[i].color = ""		
+			console.log(KFD_data_mass[i].loc)
+		} 
+
+
+
+
 		$('.footer_').fadeOut();
 		var paths = document.querySelectorAll("path"), i;
 		for (i = 0; i < paths.length; i++) {			
@@ -70,14 +109,13 @@ $(document).ready(function() {
 			paths[i].setAttribute('style', 'fill:'+base_City_Color);
 		}
 	}
-	// color = '';
-	// mark_loc=0
-	
+	color = ''
+	mark_loc=0
 	but_2.onclick = function() {
 		for (i = 0; i < KFD_data_mass.length; i++) { 
 			for (j = 0; j < scale_KFD_mass.length; j++) {
 				if (scale_KFD_mass[j].mark - KFD_data_mass[i].mark >=0 && scale_KFD_mass[j].mark - KFD_data_mass[i].mark < 10) {
-					KFD_data_mass[i].color=scale_KFD_mass[j].color;
+					KFD_data_mass[i].color=scale_KFD_mass[j].color
 				}
 			}
 		}		
@@ -86,63 +124,14 @@ $(document).ready(function() {
 			className = paths[i].getAttribute("class");			
 			for (j = 0; j < KFD_data_mass.length; j++) {				
 				if (className.includes(KFD_data_mass[j].loc)) {
-					mark_loc= KFD_data_mass[j].mark;					
+					mark_loc= KFD_data_mass[j].mark					
 					paths[i].setAttribute('style', 'fill:'+KFD_data_mass[j].color);
 				}
 			}		    		
 		}
-		$('.footer_').fadeIn();	
-	}		
+		$('.footer_').fadeIn();				   	     
+	}	
 	
-	but_3.onclick = function() {
-		for (i = 0; i < FG_data_mass.length; i++) { 
-			for (j = 0; j < scale_KFD_mass.length; j++) {
-				if (scale_KFD_mass[j].mark - FG_data_mass[i].mark >=0 && scale_KFD_mass[j].mark - FG_data_mass[i].mark < 10) {
-					FG_data_mass[i].color=scale_KFD_mass[j].color;
-				}
-			}
-		}		
-    	var paths = document.querySelectorAll("path"), i;
-		for (i = 0; i < paths.length; i++) {		
-			className = paths[i].getAttribute("class");			
-			for (j = 0; j < FG_data_mass.length; j++) {				
-				if (className.includes(FG_data_mass[j].loc)) {
-					mark_loc= FG_data_mass[j].mark;					
-					paths[i].setAttribute('style', 'fill:'+FG_data_mass[j].color);
-				}
-			}		    		
-		}
-		$('.footer_').fadeIn();	
-	}
-
-	but_4.onclick = function() {
-		for (i = 0; i < Pop_Per_data_mass.length; i++) { 
-			for (j = 0; j < scale_KFD_mass.length; j++) {
-				if (scale_KFD_mass[j].mark - Pop_Per_data_mass[i].mark >=0 && scale_KFD_mass[j].mark - Pop_Per_data_mass[i].mark < 10) {
-					Pop_Per_data_mass[i].color=scale_KFD_mass[j].color;
-				}
-			}
-		}		
-    	var paths = document.querySelectorAll("path"), i;
-		for (i = 0; i < paths.length; i++) {		
-			className = paths[i].getAttribute("class");			
-			for (j = 0; j < Pop_Per_data_mass.length; j++) {				
-				if (className.includes(Pop_Per_data_mass[j].loc)) {
-					mark_loc= Pop_Per_data_mass[j].mark;					
-					paths[i].setAttribute('style', 'fill:'+Pop_Per_data_mass[j].color);
-				}
-			}		    		
-		}
-		$('.footer_').fadeIn();	
-	}
-
-
-
-
-
-
-
-
 	const data = {
 		labels: ['Январь', 'Февраль', 'Март', 'Апрель', 'Май', 'Июнь', 'Июль'],
 		datasets: [
