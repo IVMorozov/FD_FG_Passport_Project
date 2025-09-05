@@ -371,6 +371,17 @@ files = [
 ]
 
 [[package]]
+name = "signals"
+version = "0.0.2"
+description = "Object notifier and pubsub"
+optional = false
+python-versions = "*"
+groups = ["main"]
+files = [
+    {file = "signals-0.0.2.tar.gz", hash = "sha256:b9d43a42e23c5ae8ae04ac01a5234e6502efadef263eee93191fb31f58fdb339"},
+]
+
+[[package]]
 name = "six"
 version = "1.17.0"
 description = "Python 2 and 3 compatibility utilities"
@@ -413,4 +424,4 @@ files = [
 [metadata]
 lock-version = "2.1"
 python-versions = ">=3.13"
-content-hash = "fef3e90f7aeaf944c309b5b24e5a22e5bb0cb21c6412695259740e2a82812333"
+content-hash = "6dfe149e1a048549747e5a8c88ca4a29b49370cc1e2a2b4aff46f8715fdf7dfc"

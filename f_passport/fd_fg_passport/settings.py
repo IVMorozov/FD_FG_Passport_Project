@@ -18,6 +18,13 @@ from django.urls.converters import REGISTERED_CONVERTERS
 from dotenv import load_dotenv
 from django.urls import reverse_lazy
 
+load_dotenv()
+
+SECRET_KEY = os.getenv('SECRET_KEY')
+# MISTRAL_API_KEY = os.getenv('MISTRAL_API_KEY')
+# TELEGRAM_BOT_API_KEY=os.getenv('TELEGRAM_BOT_API_KEY')
+# TELEGRAM_USER_ID=os.getenv('TELEGRAM_USER_ID')
+
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -68,6 +75,7 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+                'core.context_processors.get_main_menu',
             ],
         },
     },
@@ -109,13 +117,15 @@ AUTH_PASSWORD_VALIDATORS = [
 # Internationalization
 # https://docs.djangoproject.com/en/5.2/topics/i18n/
 
-LANGUAGE_CODE = 'en-us'
+LANGUAGE_CODE = 'ru-ru'
 
-TIME_ZONE = 'UTC'
+TIME_ZONE = 'Europe/Moscow'
 
 USE_I18N = True
 
 USE_TZ = True
+
+
 
 
 # Static files (CSS, JavaScript, Images)
@@ -129,3 +139,7 @@ STATIC_ROOT = BASE_DIR / "staticfiles"
 # https://docs.djangoproject.com/en/5.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+MEDIA_URL = "/media/"
+LOGIN_REDIRECT_URL = '/'
+MEDIA_ROOT = BASE_DIR / "media"

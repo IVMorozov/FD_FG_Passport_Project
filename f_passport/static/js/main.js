@@ -1,9 +1,15 @@
 $(document).ready(function() {
 	$('.footer_').fadeOut();
+	$('.footer__').fadeOut();
 	var hoverTimeout;
 	$('.part').hover(		
-		function() {			
-			$('.description').html($(this).attr('description-data'));
+		function() {	
+			var descriptionText = $(this).attr('description-data'); // Получаем текст
+			var imageUrl = $(this).attr('description-data-img'); // Получаем путь к изображению
+			$('.description').html('<p>' + descriptionText + '</p><img src="' + imageUrl + '" alt="Описание изображения">');
+					
+			
+
 			hoverTimeout = setTimeout(function() {
 				$('.description').fadeIn();
 			}, 300);
@@ -19,7 +25,7 @@ $(document).ready(function() {
 	
 
 	let scale_KFD_mass = [
-		    {Level: '00', color: "#ca2323ff", mark: 10,},
+			{Level: '00', color: "#ca2323ff", mark: 10,},
 			{Level: '01', color: "#ec1008ff", mark: 20,},
 			{Level: '02', color: "#e13500", mark: 30,},
 			{Level: '03', color: "#eb5700", mark: 40,},
@@ -30,11 +36,22 @@ $(document).ready(function() {
 			{Level: '08', color: "#90bd31", mark: 90,},
 			{Level: '09', color: "#308a45", mark: 100,},		    
 		]
+
+	let scale_CHN_mass = [
+			
+			{Level: '00', color: "#f2b10f", mark: 20,},
+			{Level: '01', color: "#f3d317", mark: 40,},
+			{Level: '02', color: "#c9dc26", mark: 60,},
+			{Level: '03', color: "#90bd31", mark: 80,},
+			{Level: '04', color: "#308a45", mark: 100,},		    
+		]
+	
+	
 	// console.log(KFD_data_mass_prepare)
 
 	let KFD_data_mass = [];
 	let FG_data_mass = []; 
-	let Pop_Per_data_mass = []; 
+	let CHN_data_mass = []; 
 
 	for (let i = 0; i < KFD_data_mass_prepare.length; i++) { 
 			KFD_data_mass[i] = {}; // Инициализация объекта для каждого элемента
@@ -47,20 +64,21 @@ $(document).ready(function() {
 			FG_data_mass[i].mark = KFD_data_mass_prepare[i].avg_FG;
 			FG_data_mass[i].color = "";	
 
-			Pop_Per_data_mass[i] = {}; // Инициализация объекта для каждого элемента
-			Pop_Per_data_mass[i].loc = KFD_data_mass_prepare[i].path_class;
-			Pop_Per_data_mass[i].mark = KFD_data_mass_prepare[i].avg_Pop_Per;
-			Pop_Per_data_mass[i].color = "";	
+			CHN_data_mass[i] = {}; // Инициализация объекта для каждого элемента
+			CHN_data_mass[i].loc = KFD_data_mass_prepare[i].path_class;
+			CHN_data_mass[i].mark = KFD_data_mass_prepare[i].avg_CHN;
+			CHN_data_mass[i].color = "";	
 		}  
 
 	let but_1 = document.querySelector('.but_1'),
-    	but_2 = document.querySelector('.but_2'),
-    	but_3 = document.querySelector('.but_3'),
+		but_2 = document.querySelector('.but_2'),
+		but_3 = document.querySelector('.but_3'),
 		but_4 = document.querySelector('.but_4'),
 		but_5 = document.querySelector('.but_5');
 	
 	but_1.onclick = function() {
-		$('.footer_').fadeOut();
+		$('.footer_').fadeOut(0);
+		$('.footer__').fadeOut(0);
 		var paths = document.querySelectorAll("path"), i;
 		for (i = 0; i < paths.length; i++) {			
 			paths[i].setAttribute('style', 'fill:'+base_Color);
@@ -74,6 +92,9 @@ $(document).ready(function() {
 	// mark_loc=0
 	
 	but_2.onclick = function() {
+		
+		$('.footer__').fadeOut(0);
+		$('.footer_').fadeOut(0);
 		for (i = 0; i < KFD_data_mass.length; i++) { 
 			for (j = 0; j < scale_KFD_mass.length; j++) {
 				if (scale_KFD_mass[j].mark - KFD_data_mass[i].mark >=0 && scale_KFD_mass[j].mark - KFD_data_mass[i].mark < 10) {
@@ -95,6 +116,9 @@ $(document).ready(function() {
 	}		
 	
 	but_3.onclick = function() {
+		
+		$('.footer__').fadeOut(0);
+		$('.footer_').fadeOut(0);
 		for (i = 0; i < FG_data_mass.length; i++) { 
 			for (j = 0; j < scale_KFD_mass.length; j++) {
 				if (scale_KFD_mass[j].mark - FG_data_mass[i].mark >=0 && scale_KFD_mass[j].mark - FG_data_mass[i].mark < 10) {
@@ -116,87 +140,69 @@ $(document).ready(function() {
 	}
 
 	but_4.onclick = function() {
-		for (i = 0; i < Pop_Per_data_mass.length; i++) { 
-			for (j = 0; j < scale_KFD_mass.length; j++) {
-				if (scale_KFD_mass[j].mark - Pop_Per_data_mass[i].mark >=0 && scale_KFD_mass[j].mark - Pop_Per_data_mass[i].mark < 10) {
-					Pop_Per_data_mass[i].color=scale_KFD_mass[j].color;
+		$('.footer_').fadeOut(0);
+		$('.footer__').fadeOut(0);
+		for (i = 0; i < CHN_data_mass.length; i++) { 
+			for (j = 0; j < scale_CHN_mass.length; j++) {
+				if (scale_CHN_mass[j].mark - CHN_data_mass[i].mark >=0 && scale_CHN_mass[j].mark - CHN_data_mass[i].mark < 20) {
+					CHN_data_mass[i].color = scale_CHN_mass[j].color;
+				}	
+				if (CHN_data_mass[i].mark >= 100) {
+					CHN_data_mass[i].color = scale_CHN_mass[4].color;
+					CHN_data_mass[i].color = "#09f13fff";
 				}
 			}
 		}		
     	var paths = document.querySelectorAll("path"), i;
 		for (i = 0; i < paths.length; i++) {		
 			className = paths[i].getAttribute("class");			
-			for (j = 0; j < Pop_Per_data_mass.length; j++) {				
-				if (className.includes(Pop_Per_data_mass[j].loc)) {
-					mark_loc= Pop_Per_data_mass[j].mark;					
-					paths[i].setAttribute('style', 'fill:'+Pop_Per_data_mass[j].color);
+			for (j = 0; j < CHN_data_mass.length; j++) {				
+				if (className.includes(CHN_data_mass[j].loc)) {
+					mark_loc= CHN_data_mass[j].mark;					
+					paths[i].setAttribute('style', 'fill:'+CHN_data_mass[j].color);
 				}
 			}		    		
 		}
-		$('.footer_').fadeIn();	
+		$('.footer__').fadeIn();	
 	}
 
+	but_5.onclick = function() {
+		window.location.href = "regionreport";
+			
+	}
 
-
-
-
-
-
-
-	const data = {
-		labels: ['Январь', 'Февраль', 'Март', 'Апрель', 'Май', 'Июнь', 'Июль'],
-		datasets: [
-			{
-				label: 'Продажи',
-				data: [65, 59, 80, 81, 56, 55, 40],
-				fill: false,
-				borderColor: 'rgb(75, 192, 192)',
-				tension: 0.1
-			},
-			{
-				label: 'Посещения',
-				data: [28, 48, 40, 19, 86, 27, 90],
-				fill: false,
-				borderColor: 'rgb(255, 99, 132)',
-				tension: 0.1
-			},
-			{
-				label: 'Регистрации',
-				data: [12, 35, 22, 45, 30, 50, 60],
-				fill: false,
-				borderColor: 'rgb(54, 162, 235)',
-				tension: 0.1
-			}
-		]
-	};
-
-	// Настройки графика
-	const config = {
-		type: 'line',
-		data: data,
-		options: {
-			scales: {
-				y: {
-					beginAtZero: true
-				}
-			}
-		}
-	};
-
-	// Создание графика
-	const myChart = new Chart(
-		document.getElementById('myChart'),
-		config
-	);
-
-	const myChart1 = new Chart(
-		document.getElementById('myChart1'),
-		config
-	);
-	const myChart2 = new Chart(
-		document.getElementById('myChart2'),
-		config
-	);
-	
-	console.log(KFD_data_mass);
 }) // $(document).ready(function()
+
+document.addEventListener('DOMContentLoaded', function() {
+
+    // Функция для получения CSRF токена из cookie
+    function getCookie(name) {
+        let cookieValue = null;
+        if (document.cookie && document.cookie !== '') {
+            const cookies = document.cookie.split(';');
+            for (let i = 0; i < cookies.length; i++) {
+                const cookie = cookies[i].trim();
+                if (cookie.substring(0, name.length + 1) === (name + '=')) {
+                    cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                    break;
+                }
+            }
+        }
+        return cookieValue;
+    }
+    const csrftoken = getCookie('csrftoken');
+
+
+
+
+    const toastElList = document.querySelectorAll(".toast");
+    const toastList = [...toastElList].map((toastEl) => {
+        const toast = new bootstrap.Toast(toastEl, {
+            delay: 5000, // 5 секунд
+        });
+        toast.show();
+        return toast;
+    });
+});
+
+

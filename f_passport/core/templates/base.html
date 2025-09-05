@@ -22,19 +22,19 @@
     </head>
     <body>
         {% block header %}
-            {% comment %} <header>             {% endcomment %}
-                {% comment %} {% include "nav-bar.html" %} {% endcomment %}
-            {% comment %} </header> {% endcomment %}
+            <header>            
+                {% include "nav-bar.html" %}
+            </header>
         {% endblock header %}
         
 
         <main>
-            <div class="container-fluid">                
+            <div class="col-md-8 container-fluid">                
                 {% block content %}
                 {% endblock content %}
             </div>
         </main>
-        {% comment %} <div class="toast-container position-fixed bottom-50 end-0 p-3">
+        <div class="toast-container position-fixed top-0 start-50 p-3">
             {% if messages %}
                 {% for message in messages %}
                     <div class="toast" role="alert" aria-live="assertive" aria-atomic="true">
@@ -48,22 +48,24 @@
                     </div>
                 {% endfor %}
             {% endif %}
-        </div> {% endcomment %}
+        </div>
         
         <div class="anti_footer">
-            
+            <br>
+            <br>
+            <br>
         </div> 
 
         {% block footer %}
-            <footer class="fixed-bottom">            
+            <footer class="col-md-8 fixed-bottom">            
                 <p>Python Django Study, 2025 &copy;            
-                    {% comment %} {% if user.is_superuser %}                         {% endcomment %}
+                    {% if user.is_superuser %}                        
                         Статус: <span class="badge bg-danger">Администратор</span> 
-                        {% comment %} {% elif user.is_staff %}                {% endcomment %}
+                        {% elif user.is_staff %}               
                             Статус: <span class="badge bg-warning">Сотрудник</span>
-                        {% comment %} {% else %}            {% endcomment %}
+                        {% else %}           
                             Статус: <span class="badge bg-secondary">Гость</span>           
-                    {% comment %} {% endif %} {% endcomment %}
+                    {% endif %}
                 </p>                  
             </footer>
         {% endblock footer %}

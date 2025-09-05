@@ -14,6 +14,13 @@ class MO(models.Model):
     path_fill = models.CharField (blank=True, null=True, max_length=200, verbose_name="цвет заполнения")
     path_description_data_img = models.ImageField (upload_to="MO/", blank=True, null=True, verbose_name="Изображение МО")
     path_description_data = models.TextField (blank=True, null=True, verbose_name="Описание")
+
+    def __str__(self):
+        return f" {self.mo2}"
+    
+    class Meta:
+        verbose_name = "Муниципальное образование"
+        verbose_name_plural = "Муниципальные образования"
     
 class Service(models.Model):
     name = models.CharField (max_length=200, verbose_name="Название")
@@ -21,11 +28,11 @@ class Service(models.Model):
     image = models.ImageField (upload_to="services/", blank=True, verbose_name="Изображение")
 
     def __str__(self):
-        return f" {self.description}"
+        return f" {self.name}"
     
     class Meta:
-        verbose_name = "Услугу"
-        verbose_name_plural = "Список услуг"
+        verbose_name = "Сервис"
+        verbose_name_plural = "Список сервисов"
         ordering = ['description']
     
 class Review(models.Model):
@@ -52,20 +59,21 @@ class Review(models.Model):
     ]
     
     
-    MO = models.ForeignKey (MO, on_delete=models.SET_NULL,null=True, blank=True, verbose_name="МО")
+    MO = models.ForeignKey ('MO', related_name="mo_name", on_delete=models.SET_NULL,null=True, blank=True, verbose_name="МО")
     service = models.ForeignKey ("Service", related_name="service", on_delete=models.SET_NULL,null=True, blank=True, verbose_name="вид сервиса")
-    text = models.TextField (verbose_name="Текст отзыва/предложения")  
-    created = models.DateTimeField (auto_now_add=True, verbose_name="Дата создания")
-    rating = models.PositiveSmallIntegerField (choices=RATING_CHOICES, verbose_name="Оценка") 
-    is_published = models.BooleanField (default=True, verbose_name="Опубликован")
-    ai_checked_status = models.CharField(max_length=30, choices=AI_CHOICES, default="ai_checked_false", verbose_name="Статус ИИ",)
+    text = models.TextField (verbose_name="Текст обращения")  
+    created = models.DateTimeField (blank=True, null=True, auto_now_add=True, verbose_name="Дата создания")
+    rating = models.PositiveSmallIntegerField (blank=True, null=True,choices=RATING_CHOICES, verbose_name="Оценка") 
+    is_published = models.BooleanField (blank=True, null=True,default=True, verbose_name="Опубликован")
+    ai_checked_status = models.CharField(blank=True, null=True,max_length=30, choices=AI_CHOICES, default="ai_checked_false", verbose_name="Статус ИИ",)
+    author = models.CharField (verbose_name="автор сообщения")
 
     def __str__(self):
-        return f"{self.rating}, {self.master}, {self.client_name}"
+        return f"{self.MO}, {self.service},  {self.text}, {self.created}, {self.rating} "
 
     class Meta:
-        verbose_name = "Отзыв/предложение"
-        verbose_name_plural = "Список отзывов/предложений"
+        verbose_name = "Обращение"
+        verbose_name_plural = "Список обращений"
         
 class Statistics(models.Model):
     period = models.DateTimeField(auto_now_add=True, verbose_name="Отчетный период")
@@ -141,5 +149,23 @@ class StatisticsShort(models.Model):
     CHN	= models.FloatField (verbose_name="Население", help_text="Численность населения")
     CHN_Sub	= models.FloatField (verbose_name="Население", help_text="Численность населения")
     Pop_Per	= models.FloatField (verbose_name="Население", help_text="Численность населения")
+    
+    class Meta:
+        verbose_name = "Статистика"
+        verbose_name_plural = "отчеты"
 
     # MO2	= models.TextField (verbose_name="Муниципальное образование второго уровня")
+
+class ReviewAnswer(models.Model):
+    Review = models.ForeignKey ('Review', related_name="review_id", on_delete=models.SET_NULL,null=True, blank=True, verbose_name="Идентификатор обращения")
+    answer_text = models.TextField (verbose_name="Текст ответа") 
+    answer_created = models.DateTimeField (blank=True, null=True, auto_now_add=True, verbose_name="Дата создания") 
+    answer_is_published = models.BooleanField (blank=True, null=True,default=True, verbose_name="Опубликован")    
+    answer_author = models.CharField (verbose_name="автор ответа")
+    
+    def __str__(self):
+        return f"{self.Review}, {self.answer_text},  {self.answer_created}, {self.answer_author} "
+
+    class Meta:
+        verbose_name = "Ответ на обращение"
+        verbose_name_plural = "Ответы на обращения"

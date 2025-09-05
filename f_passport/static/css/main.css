@@ -1,7 +1,7 @@
-body {margin: 0; padding: 0;}
-*{
-    margin: 0;
-    padding: 0;
+body {
+	margin: 0; 
+	padding: 0;
+
     /* box-sizing: border-box; */
 	height: calc(100vh + 50px);
     
@@ -12,14 +12,15 @@ footer {
     padding: 10px;
     text-align: center;
     height: 40px;
-    background: #681e30;
+    background: #8994f7;
 	/* background: #f2e765; */
     color: rgb(14, 13, 13);
 
     font-size: 12px;
-    max-width: 67.5%;   
+    /* max-width: 67.5%;    */
     margin-right: auto;
     margin-left: auto;
+	color: aliceblue;
 }
 
 .map {
@@ -46,6 +47,17 @@ footer {
 	padding-bottom: 3vh;
 	padding-top: 2vh;
 	height: 15vh;	
+}
+.table_name{
+	width: 400px;
+	text-align: center;
+}
+.table_data{
+	width: 250px;
+	text-align: center;
+	padding: -5px;
+	border-radius: 2px;
+	margin-bottom:2px ;
 }
 
 .region_info div{
@@ -90,17 +102,25 @@ svg {
 	cursor: pointer;
 }
 
+header .navbar  div{
+    text-align: center;
+    background-color: #8994f7;   
+	
+}
+.nav-link {
+	color: aliceblue;
+}
 
 .description {
 	
 	display: none;
 	position: absolute;
 	padding: 20px;
-	width: 320px;
-	height: 430px;
+	width: 20vh;
+	height: 30vh;
 	box-shadow: 0 0 32px 10px #ccc;
 	left: 5%;
-	bottom: calc(50% - 200px);
+	bottom: calc(50% );
 	font-family: sans-serif;
 	border-radius: 5%;
 	align-items: center; 
@@ -170,21 +190,41 @@ button .p{
 	color: aliceblue;
 	border: none;
 	margin: 5px 0 5px 0;
-	
+	text-align: center;
 
 }
+div .menu_button_rev{
+	/* width: 250px;
+	height: 40px; */
+	background-color: #8994f7;
+	border-radius: 10px;
+	box-shadow:  2px 2px 3px 1px #ccc;
+	/* font-weight: bolder; */
+	color: aliceblue;
+	border: none;
+	/* margin: 5px 0 5px 0; */
+	text-align: center;
+
+}
+
 .menu_button:hover {
 	background-color: #383d6e;
 	
 }
-.footer_ {
-	/* display: block; */
+
+.menu_button_rev:hover {
+	background-color: #383d6e;
+	color: aliceblue;
 	
-	/* display: none; */
-	/* margin-top: 20px; */
-	/* text-align: center; */
-	/* background-color: #f7f2f2; */
-	/* padding: auto; */
+}
+
+
+.footer_ {
+	display: none;
+}
+
+.footer__ {
+	display: none;
 }
 
 .f1 {
@@ -205,7 +245,7 @@ button .p{
 	margin-left: 33%;
 }
 
-.graph_1{
-	width: 300px;
-	height: 150px;
-}
+
+.toast-container {
+  z-index: 1055 !important; /* Важно, чтобы быть поверх других элементов */
+};
