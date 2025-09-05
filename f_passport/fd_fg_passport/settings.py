@@ -38,7 +38,29 @@ SECRET_KEY = 'django-insecure-u3g=e-hx-p_p$=s$*ty2$+=8%*^=+v_2vn!+5*1^(m3y4a%q8l
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+DEBUG = os.getenv("DEBUG", "False") == "TRUE"
+# DEBUG = True
+
+ALLOWED_HOSTS = [
+    'localhost',
+    "127.0.0.1",
+    "5.129.247.247"    
+    '24miv-test-passport.ru',
+    'www.24miv-test-passport.ru'
+    
+    
+
+]
+
+CSRF_TRUSTED_ORIGINS = [
+    'http://localhost',
+    'http://127.0.0.1',
+    'http://5.129.247.247',    
+    'http://24miv-test-passport.ru',
+    'http://www.24miv-test-passport.ru',
+    'https://24miv-test-passport.ru',
+    'https://www.24miv-test-passport.ru'
+]
 
 
 # Application definition
